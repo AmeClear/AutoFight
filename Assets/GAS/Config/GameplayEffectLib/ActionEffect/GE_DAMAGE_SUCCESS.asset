@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9395a0be3e547f48bd1c8320edc6c58, type: 3}
+  m_Name: GE_DAMAGE_SUCCESS
+  m_EditorClassIdentifier: 
+  Description: 
+  DurationPolicy: 3
+  Duration: 0.25
+  Period: 0
+  PeriodExecution: {fileID: 11400000, guid: 5893fd05efc022240a0488f24b3e5174, type: 2}
+  Stacking:
+    stackingType: 0
+    stackingCodeName: 
+    limitCount: 0
+    durationRefreshPolicy: 0
+    periodResetPolicy: 0
+    expirationPolicy: 0
+    denyOverflowApplication: 0
+    clearStackOnOverflow: 0
+    overflowEffects: []
+  GrantedAbilities:
+  - AbilityAsset: {fileID: 11400000, guid: f1f8dd688ee5ef547b7d18623085e2fb, type: 2}
+    AbilityLevel: 0
+    ActivationPolicy: 2
+    DeactivationPolicy: 1
+    RemovePolicy: 1
+  Modifiers: []
+  AssetTags: []
+  GrantedTags: []
+  ApplicationRequiredTags: []
+  OngoingRequiredTags: []
+  RemoveGameplayEffectsWithTags: []
+  ApplicationImmunityTags:
+  - _name: FightJudge.Def
+    _hashCode: 137644234
+    _shortName: Def
+    _ancestorHashCodes: ed6c8eed
+    _ancestorNames:
+    - FightJudge
+  - _name: FightJudge.Atk
+    _hashCode: 1959202001
+    _shortName: Atk
+    _ancestorHashCodes: ed6c8eed
+    _ancestorNames:
+    - FightJudge
+  CueOnExecute: []
+  CueDurational:
+  - {fileID: 11400000, guid: a394a00c83d85024ab7c4cc3aeb14e96, type: 2}
+  CueOnAdd: []
+  CueOnRemove: []
+  CueOnActivate: []
+  CueOnDeactivate: []

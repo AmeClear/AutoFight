@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d763af469c524557946c477b9bea3a46, type: 3}
+  m_Name: Atk
+  m_EditorClassIdentifier: 
+  Description: 
+  UniqueName: Atk
+  Cost: {fileID: 0}
+  Cooldown: {fileID: 11400000, guid: 1bb80b2768ae2da4f892fa778aa5a4ca, type: 2}
+  CooldownTime: 0.5
+  AssetTags: []
+  CancelAbilityTags: []
+  BlockAbilityTags: []
+  ActivationOwnedTags: []
+  ActivationRequiredTags: []
+  ActivationBlockedTags:
+  - _name: Ability.CD
+    _hashCode: 442750663
+    _shortName: CD
+    _ancestorHashCodes: b84ed1e0
+    _ancestorNames:
+    - Ability
+  manualEndAbility: 0
+  FrameCount: 30
+  DurationalCues:
+  - trackName: 
+    clipEvents:
+    - startFrame: 0
+      durationFrame: 15
+      cue: {fileID: 11400000, guid: 4d72c1ea6b46b0747979f0d8a7f9fdf9, type: 2}
+  InstantCues: []
+  ReleaseGameplayEffect:
+  - trackName: 
+    markEvents:
+    - startFrame: 0
+      jsonTargetCatcher:
+        Type: GAS.Runtime.CatchAreaCircle3D
+        Data: '{"Owner":{"instanceID":0},"checkLayer":{"serializedVersion":"2","m_Bits":2039},"radius":5.0,"offset":{"x":0.0,"y":0.0},"centerType":0}'
+      gameplayEffectAssets:
+      - {fileID: 11400000, guid: 59c0e8c766767724c980461942a9b51d, type: 2}
+      - {fileID: 11400000, guid: 963b33a2d04267548930b807c03878b0, type: 2}
+      - {fileID: 11400000, guid: 960bb34f4cb8e5842841651384e9e8a3, type: 2}
+  BuffGameplayEffects:
+  - trackName: "\u72B6\u6001\u8D4B\u4E88"
+    clipEvents:
+    - startFrame: 0
+      durationFrame: 15
+      buffTarget: 0
+      gameplayEffect: {fileID: 11400000, guid: 1c177a888c1fbdf42a130230bdec2508, type: 2}
+  InstantTasks:
+  - trackName: 
+    markEvents:
+    - startFrame: 0
+      InstantTasks:
+      - TaskData:
+          Type: GAS.Runtime.ApplyCostAndCoolDown
+          Data: '{}'
+  OngoingTasks: []

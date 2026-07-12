@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85dd2a6201f04545b5a8b020edcb2690, type: 3}
+  m_Name: ASC_MODE1
+  m_EditorClassIdentifier: 
+  Description: 
+  AttributeSets:
+  - Fight
+  BaseTags: []
+  BaseAbilities:
+  - {fileID: 11400000, guid: 19b23651fe9b8294aadaa97b65800fa2, type: 2}
+  - {fileID: 11400000, guid: 86c6376e54bdea4449f62f720cb21c28, type: 2}

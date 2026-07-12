@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9395a0be3e547f48bd1c8320edc6c58, type: 3}
+  m_Name: GE_DAMAGE_DEFAULT_BYATK
+  m_EditorClassIdentifier: 
+  Description: 
+  DurationPolicy: 3
+  Duration: 0.1
+  Period: 0
+  PeriodExecution: {fileID: 0}
+  Stacking:
+    stackingType: 0
+    stackingCodeName: 
+    limitCount: 0
+    durationRefreshPolicy: 0
+    periodResetPolicy: 0
+    expirationPolicy: 0
+    denyOverflowApplication: 0
+    clearStackOnOverflow: 0
+    overflowEffects: []
+  GrantedAbilities: []
+  Modifiers: []
+  AssetTags: []
+  GrantedTags: []
+  ApplicationRequiredTags:
+  - _name: FightJudge.Atk
+    _hashCode: 1959202001
+    _shortName: Atk
+    _ancestorHashCodes: ed6c8eed
+    _ancestorNames:
+    - FightJudge
+  OngoingRequiredTags: []
+  RemoveGameplayEffectsWithTags: []
+  ApplicationImmunityTags: []
+  CueOnExecute: []
+  CueDurational:
+  - {fileID: 11400000, guid: 2085258730948f2449fc6d4d2d68f6d6, type: 2}
+  CueOnAdd: []
+  CueOnRemove: []
+  CueOnActivate: []
+  CueOnDeactivate: []

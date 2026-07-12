@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9395a0be3e547f48bd1c8320edc6c58, type: 3}
+  m_Name: GE_DAMAGE_DEFAULT_BYDEF
+  m_EditorClassIdentifier: 
+  Description: 
+  DurationPolicy: 3
+  Duration: 0.25
+  Period: 0
+  PeriodExecution: {fileID: 11400000, guid: 814a14e7874a15e478d2b0e8654ab6dd, type: 2}
+  Stacking:
+    stackingType: 0
+    stackingCodeName: 
+    limitCount: 0
+    durationRefreshPolicy: 0
+    periodResetPolicy: 0
+    expirationPolicy: 0
+    denyOverflowApplication: 0
+    clearStackOnOverflow: 0
+    overflowEffects: []
+  GrantedAbilities:
+  - AbilityAsset: {fileID: 11400000, guid: aa21f44d725d08147bfb53b067ff77ef, type: 2}
+    AbilityLevel: 0
+    ActivationPolicy: 2
+    DeactivationPolicy: 1
+    RemovePolicy: 1
+  Modifiers: []
+  AssetTags: []
+  GrantedTags: []
+  ApplicationRequiredTags:
+  - _name: FightJudge.Def
+    _hashCode: 137644234
+    _shortName: Def
+    _ancestorHashCodes: ed6c8eed
+    _ancestorNames:
+    - FightJudge
+  OngoingRequiredTags: []
+  RemoveGameplayEffectsWithTags: []
+  ApplicationImmunityTags: []
+  CueOnExecute: []
+  CueDurational:
+  - {fileID: 11400000, guid: 5116dfec705ef7a4d95a735590b1dc85, type: 2}
+  CueOnAdd: []
+  CueOnRemove: []
+  CueOnActivate: []
+  CueOnDeactivate: []
