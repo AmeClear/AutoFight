@@ -517,32 +517,11 @@ MonoBehaviour:
   target: {fileID: 1081295336}
   firstPersonController: {fileID: 777199358}
   thirdPersonController: {fileID: 777199359}
---- !u!1 &1081295332 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 329789174737030071, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}
-  m_PrefabInstance: {fileID: 7623689337834815975}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1081295336 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6733836191750822630, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}
   m_PrefabInstance: {fileID: 7623689337834815975}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1081295339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1081295332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f478c262cd0ea1489e7296418fe9784, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  headAnchor: {fileID: 7623689337834815976}
-  headAnchorName: Head_Top
-  headAnchorFallbackOffset: {x: 0, y: 2, z: 0}
-  visibilityRenderer: {fileID: 0}
 --- !u!1 &2102603252
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,16 +730,8 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 5878492146798392296, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 329789174737030071, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1081295339}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}
---- !u!4 &7623689337834815976 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7848208771652826466, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}
-  m_PrefabInstance: {fileID: 7623689337834815975}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
