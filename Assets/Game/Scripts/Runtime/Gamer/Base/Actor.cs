@@ -5,13 +5,13 @@ public class Actor : MonoBehaviour
 {
     protected AbilitySystemComponent asc;
     protected MoveComponent moveComponent;
-    protected ActorHealthBar healthBar;
+    protected ActorBar healthBar;
 
     private void Awake()
     {
         asc = GetComponent<AbilitySystemComponent>();
         moveComponent = GetComponent<MoveComponent>();
-        healthBar = GetComponent<ActorHealthBar>();
+        healthBar = GetComponent<ActorBar>();
         Init();
     }
 
@@ -33,6 +33,15 @@ public class Actor : MonoBehaviour
         asc.AttrSet<AS_Fight>().HealthValue.RegisterPostBaseValueChange(OnHpChange);
         asc.AttrSet<AS_Fight>().StamValue.RegisterPostBaseValueChange(OnStamChange);
         asc.AttrSet<AS_Fight>().DefProgress.RegisterPostBaseValueChange(OnDefChange);
+
+        _ = GameDataCenter.Instance;
+        _ = ActorObserverSystem.Instance;
+        ActorEventPublisher.Bind(this, asc);
+    }
+
+    protected virtual void OnDestroy()
+    {
+        ActorEventPublisher.Unbind(this);
     }
 
     protected virtual void OnHpChange(AttributeBase attributeBase, float oldValue, float newValue)

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class ActorHealthBar : MonoBehaviour
+public class ActorBar : MonoBehaviour
 {
     [Header("挂载点")]
     [SerializeField] private Transform headAnchor;

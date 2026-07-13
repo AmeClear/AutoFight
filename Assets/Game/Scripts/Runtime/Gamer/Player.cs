@@ -43,8 +43,10 @@ public class Player : Actor
         SyncCameraView();
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
+
         if (_input == null) return;
 
         _input.Player.Move.performed -= OnMove;

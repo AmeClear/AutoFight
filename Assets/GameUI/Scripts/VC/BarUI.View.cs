@@ -6,9 +6,10 @@
 ---------------------------------*/
 using UnityEngine.UI;
 using UnityEngine;
+using GameEvent;
 
-	public partial class BarUI:WindowBase
-	{
+public partial class BarUI:WindowBase
+{
 	
 		 public BarUIDataComponent dataComp;
 	
@@ -35,10 +36,17 @@ using UnityEngine;
 		 {
 			 base.OnDestroy();
 		 }
-		 #endregion
-		 #region 表现变化
-		    
-		 #endregion
-		 #region UI组件事件
-		 #endregion
-	}
+    protected override void OnUIListener()
+    {
+        EventBus.Subscribe<ActorRegisteredEvent>(OnActorRegistered);
+    }
+    #endregion
+    #region 表现变化
+	private void OnActorRegistered(ActorRegisteredEvent e)
+    { 
+
+    }
+    #endregion
+    #region UI组件事件
+    #endregion
+}
