@@ -1,0 +1,48 @@
+ManifestFileVersion: 0
+CRC: 2116207441
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 0617869442207e7d3f309d3302b8ebdd
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 0f3b0eb041e673caee959678d6795c42
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 0617869442207e7d3f309d3302b8ebdd
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8394ccc5d5cb7de4c99f5658c8dc5d02, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.FontData
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+Assets:
+- Assets/Game/Res/Prefabs/3DUI/UnitHealthBar.prefab
+Dependencies: []

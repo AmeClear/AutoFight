@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: 
   UniqueName: Atk
-  Cost: {fileID: 0}
+  Cost: {fileID: 11400000, guid: 89840a8a2a070924499b08c091160cb2, type: 2}
   Cooldown: {fileID: 11400000, guid: 1bb80b2768ae2da4f892fa778aa5a4ca, type: 2}
   CooldownTime: 0.5
   AssetTags: []

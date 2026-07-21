@@ -31,12 +31,7 @@ MonoBehaviour:
     - Ability
   manualEndAbility: 0
   FrameCount: 30
-  DurationalCues:
-  - trackName: 
-    clipEvents:
-    - startFrame: 15
-      durationFrame: 15
-      cue: {fileID: 11400000, guid: c04f6432c778e254fbf64ef268c0d44d, type: 2}
+  DurationalCues: []
   InstantCues: []
   ReleaseGameplayEffect: []
   BuffGameplayEffects:

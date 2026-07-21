@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 2109604556
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: gameui
+      Dependencies: {}
+    Info_1:
+      Name: game
+      Dependencies: {}

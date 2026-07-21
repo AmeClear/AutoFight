@@ -1,0 +1,32 @@
+﻿{
+    "version": "20260721142342",
+    "buildTarget": "StandaloneWindows64",
+    "assets": [
+        {
+            "address": "Assets/GameUI/Res/Prefabs/BarUI.prefab",
+            "bundleName": "gameui",
+            "assetPath": "Assets/GameUI/Res/Prefabs/BarUI.prefab",
+            "group": "Prefab"
+        },
+        {
+            "address": "Assets/Game/Res/Prefabs/3DUI/UnitHealthBar.prefab",
+            "bundleName": "game",
+            "assetPath": "Assets/Game/Res/Prefabs/3DUI/UnitHealthBar.prefab",
+            "group": "Prefab"
+        }
+    ],
+    "bundles": [
+        {
+            "bundleName": "game",
+            "dependencies": [],
+            "hash": "bafc9ecf8c459501ac4f558e40e2495e",
+            "size": 8260
+        },
+        {
+            "bundleName": "gameui",
+            "dependencies": [],
+            "hash": "e3e135af5e064313f5f8505aa8333394",
+            "size": 9099
+        }
+    ]
+}

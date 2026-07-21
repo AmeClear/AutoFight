@@ -624,7 +624,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6351172150766025925}
-  - component: {fileID: -2906834579208063019}
   - component: {fileID: 6204249686849469657}
   - component: {fileID: 2273838725521812605}
   - component: {fileID: 5351102447958753602}
@@ -661,24 +660,6 @@ RectTransform:
   m_AnchoredPosition: {x: 116.4, y: -49}
   m_SizeDelta: {x: 120, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &-2906834579208063019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7777749390354823207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc77520d6a61fbf4b8d915cfb9a12c48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HPFillImage: {fileID: 0}
-  StaFillImage: {fileID: 0}
-  DefFillImage: {fileID: 0}
-  HPTxtText: {fileID: 0}
-  StaTxtText: {fileID: 0}
-  DefTxtText: {fileID: 0}
 --- !u!225 &6204249686849469657
 CanvasGroup:
   m_ObjectHideFlags: 0
