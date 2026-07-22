@@ -37,10 +37,12 @@ public class Actor : MonoBehaviour
         _ = GameDataCenter.Instance;
         _ = ActorObserverSystem.Instance;
         ActorEventPublisher.Bind(this, asc);
+        ActorAbilityCooldownPublisher.Bind(this, asc);
     }
 
     protected virtual void OnDestroy()
     {
+        ActorAbilityCooldownPublisher.Unbind(this);
         ActorEventPublisher.Unbind(this);
     }
 

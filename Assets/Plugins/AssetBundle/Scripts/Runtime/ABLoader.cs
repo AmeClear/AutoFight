@@ -132,15 +132,15 @@ namespace ABSystem
             if (string.IsNullOrEmpty(address))
                 return null;
 
-#if UNITY_EDITOR
-            if (!Manager.IsInitialized || !Manager.Catalog.TryGetAsset(address, out _))
-            {
-                // Editor 模拟：直接按 address 当资产路径加载
-                var editorAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(address);
-                if (editorAsset != null)
-                    return editorAsset;
-            }
-#endif
+//#if UNITY_EDITOR
+//            if (!Manager.IsInitialized || !Manager.Catalog.TryGetAsset(address, out _))
+//            {
+//                // Editor 模拟：直接按 address 当资产路径加载
+//                var editorAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(address);
+//                if (editorAsset != null)
+//                    return editorAsset;
+//            }
+//#endif
 
             if (!Manager.IsInitialized)
             {

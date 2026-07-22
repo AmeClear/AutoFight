@@ -83,9 +83,12 @@ namespace ABSystem.Editor
         private sealed class AddressEntry
         {
             public string GroupCodeName;
+            public string GroupName;
             public string CodeName;
             public string Address;
             public string AssetPath;
+            public string FileName;
+            public string FileNameWithoutExtension;
         }
 
         private static List<AddressEntry> CollectAddressEntries(ABMarkDatabase database)
@@ -113,13 +116,18 @@ namespace ABSystem.Editor
                 }
 
                 var codeName = MakeUniqueIdentifier(preferredName, mark.assetPath, usedNames);
+                var fileName = Path.GetFileName(mark.assetPath) ?? string.Empty;
+                var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(mark.assetPath) ?? string.Empty;
 
                 result.Add(new AddressEntry
                 {
                     GroupCodeName = groupCodeName,
+                    GroupName = groupName,
                     CodeName = codeName,
                     Address = address,
-                    AssetPath = mark.assetPath
+                    AssetPath = mark.assetPath,
+                    FileName = fileName,
+                    FileNameWithoutExtension = fileNameWithoutExtension
                 });
             }
 
@@ -180,19 +188,17 @@ namespace ABSystem.Editor
             sb.AppendLine();
 
             sb.AppendLine("        /// <summary>");
-            sb.AppendLine("        /// 地址是否已在常量库中登记。");
+            sb.AppendLine("        /// 全部地址登记信息（含文件名映射，供反查使用）。");
             sb.AppendLine("        /// </summary>");
-            sb.AppendLine("        public static bool Contains(string address)");
+            sb.AppendLine("        public static readonly ABAddressInfo[] Infos =");
             sb.AppendLine("        {");
-            sb.AppendLine("            if (string.IsNullOrEmpty(address))");
-            sb.AppendLine("                return false;");
-            sb.AppendLine("            for (var i = 0; i < All.Length; i++)");
-            sb.AppendLine("            {");
-            sb.AppendLine("                if (All[i] == address)");
-            sb.AppendLine("                    return true;");
-            sb.AppendLine("            }");
-            sb.AppendLine("            return false;");
-            sb.AppendLine("        }");
+            foreach (var entry in entries)
+            {
+                sb.AppendLine(
+                    $"            new ABAddressInfo(\"{ABCodeGenUtil.EscapeCSharp(entry.CodeName)}\", \"{ABCodeGenUtil.EscapeCSharp(entry.FileName)}\", \"{ABCodeGenUtil.EscapeCSharp(entry.FileNameWithoutExtension)}\", \"{ABCodeGenUtil.EscapeCSharp(entry.AssetPath)}\", {entry.GroupCodeName}.{entry.CodeName}, \"{ABCodeGenUtil.EscapeCSharp(entry.GroupName)}\"),");
+            }
+
+            sb.AppendLine("        };");
             sb.AppendLine("    }");
             sb.AppendLine("}");
             return sb.ToString();

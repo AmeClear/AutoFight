@@ -58,3 +58,16 @@ public class ObserveTargetChangedEvent : IGameEvent
     public Actor PreviousTarget { get; set; }
     public Actor CurrentTarget { get; set; }
 }
+
+/// <summary>
+/// Actor 技能冷却变化事件。
+/// </summary>
+public class ActorAbilityCooldownChangedEvent : IGameEvent
+{
+    public int ActorId { get; set; }
+    public Actor Actor { get; set; }
+    public string AbilityName { get; set; }
+    public float TimeRemaining { get; set; }
+    public float Duration { get; set; }
+    public bool IsReady => TimeRemaining <= 0f;
+}

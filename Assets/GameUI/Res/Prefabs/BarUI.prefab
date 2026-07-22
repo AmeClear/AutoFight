@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2882385739765156937}
   - component: {fileID: 5851594277024977}
   - component: {fileID: 6682810387837942718}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DefFill
   m_TagString: Image
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 5256748699981579633}
   - component: {fileID: 3394247544925950103}
   - component: {fileID: 5648562732225126608}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StaTxt
   m_TagString: Text
   m_Icon: {fileID: 0}
@@ -107,9 +107,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6351172150766025925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 271, y: -58}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3394247544925950103
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 4437028544294242562}
   - component: {fileID: 7976907393250258354}
   - component: {fileID: 1910902001914022964}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StaFill
   m_TagString: Image
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 2376113475548386131}
   - component: {fileID: 7241985737952592754}
   - component: {fileID: 6790468098454329437}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,10 +262,10 @@ RectTransform:
   - {fileID: 1938349486077688167}
   m_Father: {fileID: 6351172150766025925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 16}
-  m_SizeDelta: {x: 200, y: 20}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 282, y: -42}
+  m_SizeDelta: {x: 500, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7241985737952592754
 CanvasRenderer:
@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 712318738405535018}
   - component: {fileID: 861998029334117569}
   - component: {fileID: 7180157774212405079}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPTxt
   m_TagString: Text
   m_Icon: {fileID: 0}
@@ -337,9 +337,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6351172150766025925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 16}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 271, y: -42}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &861998029334117569
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 8393194864318300029}
   - component: {fileID: 1946566660864485068}
   - component: {fileID: 3484152298441624495}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DefTxt
   m_TagString: Text
   m_Icon: {fileID: 0}
@@ -416,9 +416,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6351172150766025925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -16}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 271, y: -74}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1946566660864485068
@@ -474,7 +474,7 @@ GameObject:
   - component: {fileID: 1371465011395583937}
   - component: {fileID: 5144977877229562591}
   - component: {fileID: 7907107507173136451}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,10 +496,10 @@ RectTransform:
   - {fileID: 4437028544294242562}
   m_Father: {fileID: 6351172150766025925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 16}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 282, y: -58}
+  m_SizeDelta: {x: 500, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5144977877229562591
 CanvasRenderer:
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 1292426495614905257}
   - component: {fileID: 2329391810040632237}
   - component: {fileID: 1862227292681500139}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Def
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -572,10 +572,10 @@ RectTransform:
   - {fileID: 2882385739765156937}
   m_Father: {fileID: 6351172150766025925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -16}
-  m_SizeDelta: {x: 200, y: 16}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 282, y: -74}
+  m_SizeDelta: {x: 500, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2329391810040632237
 CanvasRenderer:
@@ -628,7 +628,8 @@ GameObject:
   - component: {fileID: 2273838725521812605}
   - component: {fileID: 5351102447958753602}
   - component: {fileID: 3448661669576777861}
-  m_Layer: 0
+  - component: {fileID: -3729786562996794191}
+  m_Layer: 5
   m_Name: BarUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -655,10 +656,10 @@ RectTransform:
   - {fileID: 8393194864318300029}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 116.4, y: -49}
-  m_SizeDelta: {x: 120, y: 36}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &6204249686849469657
 CanvasGroup:
@@ -735,6 +736,24 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 2039
+--- !u!114 &-3729786562996794191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7777749390354823207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc77520d6a61fbf4b8d915cfb9a12c48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPFillImage: {fileID: 2752881096528643301}
+  StaFillImage: {fileID: 1910902001914022964}
+  DefFillImage: {fileID: 6682810387837942718}
+  HPTxtText: {fileID: 7180157774212405079}
+  StaTxtText: {fileID: 5648562732225126608}
+  DefTxtText: {fileID: 3484152298441624495}
 --- !u!1 &8323483724974288584
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,7 +765,7 @@ GameObject:
   - component: {fileID: 1938349486077688167}
   - component: {fileID: 2052702471029991276}
   - component: {fileID: 2752881096528643301}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPFill
   m_TagString: Image
   m_Icon: {fileID: 0}

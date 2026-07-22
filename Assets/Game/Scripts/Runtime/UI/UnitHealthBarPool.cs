@@ -90,6 +90,20 @@ public class UnitHealthBarPool : MonoBehaviour
             bar.SetCamera(targetCamera);
     }
 
+    /// <summary>
+    /// 若主相机在运行时切换，请调用此方法同步血条投影相机。
+    /// </summary>
+    private void LateUpdate()
+    {
+        if (targetCamera != null)
+            return;
+
+        if (Camera.main == null)
+            return;
+
+        SetTargetCamera(Camera.main);
+    }
+
     private void Prewarm()
     {
         if (healthBarPrefab == null || healthBarRoot == null)

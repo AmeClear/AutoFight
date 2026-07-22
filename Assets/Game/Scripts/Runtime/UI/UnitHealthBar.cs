@@ -27,6 +27,7 @@ public class UnitHealthBar : MonoBehaviour
     private Transform headPoint;
     private Camera targetCamera;
     private Renderer visibilityRenderer;
+    private CanvasGroup canvasGroup;
 
     private float healthTargetFill = 1f;
     private float healthDisplayFill = 1f;
@@ -38,6 +39,7 @@ public class UnitHealthBar : MonoBehaviour
     private Vector3 lastSampledWorldPos = Vector3.positiveInfinity;
     private Vector2 lastScreenPos = new Vector2(float.NaN, float.NaN);
     private bool isBound;
+    private bool isVisualVisible = true;
 
     public bool IsBound => isBound;
 
@@ -45,6 +47,8 @@ public class UnitHealthBar : MonoBehaviour
     {
         if (uiRect == null)
             uiRect = transform as RectTransform;
+
+        EnsureCanvasGroup();
 
         if (fillImage != null)
             healthDisplayFill = fillImage.fillAmount;
@@ -59,6 +63,9 @@ public class UnitHealthBar : MonoBehaviour
             healthText.gameObject.SetActive(showHealthText);
     }
 
+    /// <summary>
+    /// 绑定世界挂载点与相机，并立刻刷新一次屏幕位置。
+    /// </summary>
     public void SetTarget(Transform head, Camera camera)
     {
         headPoint = head;
@@ -66,13 +73,20 @@ public class UnitHealthBar : MonoBehaviour
         isBound = headPoint != null && targetCamera != null;
         lastSampledWorldPos = Vector3.positiveInfinity;
         lastScreenPos = new Vector2(float.NaN, float.NaN);
-        gameObject.SetActive(isBound);
+
+        // 对象显隐由对象池管理；此处只用 CanvasGroup 控制可视，避免停掉 Update。
+        if (isBound)
+            ForceRefreshScreenPosition();
+        else
+            SetVisualVisible(false);
     }
 
     public void SetCamera(Camera camera)
     {
         targetCamera = camera;
         isBound = headPoint != null && targetCamera != null;
+        if (isBound)
+            ForceRefreshScreenPosition();
     }
 
     public void SetVisibilityRenderer(Renderer renderer)
@@ -88,11 +102,12 @@ public class UnitHealthBar : MonoBehaviour
         isBound = false;
         lastSampledWorldPos = Vector3.positiveInfinity;
         lastScreenPos = new Vector2(float.NaN, float.NaN);
+        SetVisualVisible(false);
     }
 
     public void SetHealth(float currentHp, float maxHp)
     {
-        ApplyFill(fillImage, ref healthTargetFill, ref healthDisplayFill, currentHp, maxHp);
+        ApplyFill(fillImage, ref healthTargetFill, ref healthDisplayFill, currentHp, maxHp, true);
 
         if (healthText != null && showHealthText)
         {
@@ -103,15 +118,21 @@ public class UnitHealthBar : MonoBehaviour
 
     public void SetStamina(float currentStamina, float maxStamina)
     {
-        ApplyFill(staminaFillImage, ref staminaTargetFill, ref staminaDisplayFill, currentStamina, maxStamina);
+        ApplyFill(staminaFillImage, ref staminaTargetFill, ref staminaDisplayFill, currentStamina, maxStamina, true);
     }
 
     public void SetDefense(float currentDefense, float maxDefense)
     {
-        ApplyFill(defenseFillImage, ref defenseTargetFill, ref defenseDisplayFill, currentDefense, maxDefense);
+        ApplyFill(defenseFillImage, ref defenseTargetFill, ref defenseDisplayFill, currentDefense, maxDefense, true);
     }
 
-    private void ApplyFill(Image image, ref float targetFill, ref float displayFill, float current, float max)
+    private void ApplyFill(
+        Image image,
+        ref float targetFill,
+        ref float displayFill,
+        float current,
+        float max,
+        bool forceApply)
     {
         if (image == null)
             return;
@@ -119,7 +140,7 @@ public class UnitHealthBar : MonoBehaviour
         float safeMax = Mathf.Max(max, 0.0001f);
         float nextTarget = Mathf.Clamp01(current / safeMax);
 
-        if (Mathf.Abs(targetFill - nextTarget) <= 0.001f)
+        if (!forceApply && Mathf.Abs(targetFill - nextTarget) <= 0.001f)
             return;
 
         targetFill = nextTarget;
@@ -137,7 +158,7 @@ public class UnitHealthBar : MonoBehaviour
             return;
 
         UpdateFillSmooth();
-        TryUpdateScreenPosition();
+        TryUpdateScreenPosition(false);
     }
 
     private void UpdateFillSmooth()
@@ -162,48 +183,74 @@ public class UnitHealthBar : MonoBehaviour
         image.fillAmount = displayFill;
     }
 
-    private void TryUpdateScreenPosition()
+    private void ForceRefreshScreenPosition()
+    {
+        TryUpdateScreenPosition(true);
+    }
+
+    private void TryUpdateScreenPosition(bool force)
     {
         if (headPoint == null || targetCamera == null || uiRect == null)
             return;
 
-        if (visibilityRenderer != null && !visibilityRenderer.isVisible)
+        // Renderer.isVisible 在首帧/未渲染时常为 false，不能据此关掉整条 Update 链路。
+        // 仅作为辅助剔除：已确认不可见时隐藏视觉，但保持组件继续跑。
+        if (!force && visibilityRenderer != null && !visibilityRenderer.isVisible)
         {
-            SetBarActive(false);
+            SetVisualVisible(false);
             return;
         }
 
         Vector3 worldPos = headPoint.position + worldOffset;
-        if (!ShouldUpdatePosition(worldPos))
+        if (!force && !ShouldUpdatePosition(worldPos))
             return;
 
         Vector3 screenPos = targetCamera.WorldToScreenPoint(worldPos);
         lastSampledWorldPos = worldPos;
 
-        if (screenPos.z < 0f || IsOffScreen(screenPos))
+        if (screenPos.z <= 0f || IsOffScreen(screenPos))
         {
-            SetBarActive(false);
+            SetVisualVisible(false);
             return;
         }
 
-        SetBarActive(true);
+        SetVisualVisible(true);
 
-        if (IsScreenPositionDirty(screenPos))
+        if (force || IsScreenPositionDirty(screenPos))
         {
             uiRect.position = screenPos;
             lastScreenPos = screenPos;
         }
     }
 
-    private void SetBarActive(bool active)
+    private void EnsureCanvasGroup()
     {
-        if (gameObject.activeSelf != active)
-            gameObject.SetActive(active);
+        if (canvasGroup != null)
+            return;
+
+        canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+    }
+
+    /// <summary>
+    /// 仅控制视觉可见性，不 SetActive，避免 Update 停掉后无法再显示。
+    /// </summary>
+    private void SetVisualVisible(bool visible)
+    {
+        if (isVisualVisible == visible && canvasGroup != null)
+            return;
+
+        isVisualVisible = visible;
+        EnsureCanvasGroup();
+        canvasGroup.alpha = visible ? 1f : 0f;
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.interactable = false;
     }
 
     private bool ShouldUpdatePosition(Vector3 worldPos)
     {
-        if (Time.frameCount % positionUpdateInterval == 0)
+        if (Time.frameCount % Mathf.Max(1, positionUpdateInterval) == 0)
             return true;
 
         if (lastSampledWorldPos == Vector3.positiveInfinity)

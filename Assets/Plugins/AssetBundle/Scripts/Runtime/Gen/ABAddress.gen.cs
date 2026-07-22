@@ -23,6 +23,12 @@ namespace ABSystem
             public const string BarUI = "Assets/GameUI/Res/Prefabs/BarUI.prefab";
 
             /// <summary>
+            /// Assets/GameUI/Res/Prefabs/UISkill.prefab
+            /// <para>Address = Assets/GameUI/Res/Prefabs/UISkill.prefab</para>
+            /// </summary>
+            public const string UISkill = "Assets/GameUI/Res/Prefabs/UISkill.prefab";
+
+            /// <summary>
             /// Assets/Game/Res/Prefabs/3DUI/UnitHealthBar.prefab
             /// <para>Address = Assets/Game/Res/Prefabs/3DUI/UnitHealthBar.prefab</para>
             /// </summary>
@@ -36,22 +42,18 @@ namespace ABSystem
         public static readonly string[] All =
         {
             Prefab.BarUI,
+            Prefab.UISkill,
             Prefab.UnitHealthBar,
         };
 
         /// <summary>
-        /// 地址是否已在常量库中登记。
+        /// 全部地址登记信息（含文件名映射，供反查使用）。
         /// </summary>
-        public static bool Contains(string address)
+        public static readonly ABAddressInfo[] Infos =
         {
-            if (string.IsNullOrEmpty(address))
-                return false;
-            for (var i = 0; i < All.Length; i++)
-            {
-                if (All[i] == address)
-                    return true;
-            }
-            return false;
-        }
+            new ABAddressInfo("BarUI", "BarUI.prefab", "BarUI", "Assets/GameUI/Res/Prefabs/BarUI.prefab", Prefab.BarUI, "Prefab"),
+            new ABAddressInfo("UISkill", "UISkill.prefab", "UISkill", "Assets/GameUI/Res/Prefabs/UISkill.prefab", Prefab.UISkill, "Prefab"),
+            new ABAddressInfo("UnitHealthBar", "UnitHealthBar.prefab", "UnitHealthBar", "Assets/Game/Res/Prefabs/3DUI/UnitHealthBar.prefab", Prefab.UnitHealthBar, "Prefab"),
+        };
     }
 }

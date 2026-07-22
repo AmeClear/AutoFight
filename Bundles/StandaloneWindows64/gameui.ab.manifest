@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3454783515
+CRC: 3344792570
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c38264e09679e9e0008013848108d81e
+    Hash: 93b41b71cfa06d187850068cb737d815
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 8cb49648631ded04efb6918e376a913e
+    Hash: 1107dbfb257bac80ed053bcba45a071d
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: c38264e09679e9e0008013848108d81e
+    Hash: 93b41b71cfa06d187850068cb737d815
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -27,7 +27,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: cc77520d6a61fbf4b8d915cfb9a12c48, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 75ab44528c42a5d4d8cdffdc2f904f06, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -50,5 +54,6 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
+- Assets/GameUI/Res/Prefabs/UISkill.prefab
 - Assets/GameUI/Res/Prefabs/BarUI.prefab
 Dependencies: []

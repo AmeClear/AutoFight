@@ -10,7 +10,6 @@ public class UIModule
     public static UIModule Instance { get { if (_instance == null) { _instance = new UIModule(); } return _instance; } }
 
     private Camera mUICamera;
-    private Transform mUIRoot;
     private WindowConfig mWindowConfig;
 
     private Dictionary<string, WindowBase> mAllWindowDic = new Dictionary<string, WindowBase>();//所有窗口的Dic
@@ -24,7 +23,6 @@ public class UIModule
     public void Initialize(Func<string, GameObject> getObj)
     {
         mUICamera = GameObject.Find("UICamera").GetComponent<Camera>();
-        mUIRoot = GameObject.Find("UIRoot").transform;
         // mWindowConfig = Resources.Load<WindowConfig>("WindowConfig");
         this.GetObjFunc = getObj;
         //在手机上不会触发调用
@@ -282,16 +280,7 @@ public class UIModule
         }
     }
 
-    public GameObject TempLoadWindow(string wndName)
-    {
-        GameObject window = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>(mWindowConfig.GetWindowPath(wndName)), mUIRoot);
-        //window.transform.SetParent(mUIRoot);
-        window.transform.localScale = Vector3.one;
-        window.transform.localPosition = Vector3.zero;
-        window.transform.rotation = Quaternion.identity;
-        window.name = wndName;
-        return window;
-    }
+    
     #endregion
     #region 堆栈系统
 

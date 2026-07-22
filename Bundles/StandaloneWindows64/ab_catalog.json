@@ -1,11 +1,17 @@
 ﻿{
-    "version": "20260721142342",
+    "version": "20260722190646",
     "buildTarget": "StandaloneWindows64",
     "assets": [
         {
             "address": "Assets/GameUI/Res/Prefabs/BarUI.prefab",
             "bundleName": "gameui",
             "assetPath": "Assets/GameUI/Res/Prefabs/BarUI.prefab",
+            "group": "Prefab"
+        },
+        {
+            "address": "Assets/GameUI/Res/Prefabs/UISkill.prefab",
+            "bundleName": "gameui",
+            "assetPath": "Assets/GameUI/Res/Prefabs/UISkill.prefab",
             "group": "Prefab"
         },
         {
@@ -25,8 +31,8 @@
         {
             "bundleName": "gameui",
             "dependencies": [],
-            "hash": "e3e135af5e064313f5f8505aa8333394",
-            "size": 9099
+            "hash": "a349fe6fabea41646e69c7d33b341b5d",
+            "size": 101141
         }
     ]
 }

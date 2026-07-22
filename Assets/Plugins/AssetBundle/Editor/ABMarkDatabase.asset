@@ -25,6 +25,11 @@ MonoBehaviour:
     codeName: BarUI
     bundleName: gameui
     group: Prefab
+  - assetPath: Assets/GameUI/Res/Prefabs/UISkill.prefab
+    address: Assets/GameUI/Res/Prefabs/UISkill.prefab
+    codeName: UISkill
+    bundleName: gameui
+    group: Prefab
   - assetPath: Assets/Game/Res/Prefabs/3DUI/UnitHealthBar.prefab
     address: Assets/Game/Res/Prefabs/3DUI/UnitHealthBar.prefab
     codeName: UnitHealthBar

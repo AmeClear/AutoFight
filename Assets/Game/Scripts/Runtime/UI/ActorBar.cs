@@ -12,6 +12,7 @@ public class ActorBar : MonoBehaviour
     [SerializeField] private Renderer visibilityRenderer;
 
     private UnitHealthBar _healthBar;
+    private bool _pendingAcquire;
 
     public bool IsActive => _healthBar != null && _healthBar.IsBound;
 
@@ -25,33 +26,27 @@ public class ActorBar : MonoBehaviour
 
     private void OnEnable()
     {
-        if (headAnchor == null)
-        {
-            Debug.LogWarning($"[ActorHealthBar] {name} 缺少 Head 挂载点，血条未创建。", this);
-            return;
-        }
+        TryAcquireHealthBar();
+    }
 
-        UnitHealthBarPool pool = UnitHealthBarPool.Instance;
-        if (pool == null)
-        {
-            Debug.LogWarning($"[ActorHealthBar] 场景中未找到 UnitHealthBarPool，血条未创建。", this);
-            return;
-        }
-
-        _healthBar = pool.Get(headAnchor);
+    private void Start()
+    {
+        // 兜底：若 OnEnable 时对象池尚未 Awake，下一帧再取一次。
         if (_healthBar == null)
-            return;
-
-        _healthBar.SetVisibilityRenderer(visibilityRenderer);
+            TryAcquireHealthBar();
     }
 
     private void OnDisable()
     {
+        _pendingAcquire = false;
         ReleaseHealthBar();
     }
 
     public void SetHealth(float currentHp, float maxHp)
     {
+        if (_healthBar == null)
+            TryAcquireHealthBar();
+
         if (_healthBar == null)
             return;
 
@@ -61,6 +56,9 @@ public class ActorBar : MonoBehaviour
     public void SetStamina(float currentStamina, float maxStamina)
     {
         if (_healthBar == null)
+            TryAcquireHealthBar();
+
+        if (_healthBar == null)
             return;
 
         _healthBar.SetStamina(currentStamina, maxStamina);
@@ -69,9 +67,43 @@ public class ActorBar : MonoBehaviour
     public void SetDefense(float currentDefense, float maxDefense)
     {
         if (_healthBar == null)
+            TryAcquireHealthBar();
+
+        if (_healthBar == null)
             return;
 
         _healthBar.SetDefense(currentDefense, maxDefense);
+    }
+
+    private void TryAcquireHealthBar()
+    {
+        if (_healthBar != null || !isActiveAndEnabled)
+            return;
+
+        if (headAnchor == null)
+        {
+            Debug.LogWarning($"[ActorBar] {name} 缺少 Head 挂载点，血条未创建。", this);
+            return;
+        }
+
+        UnitHealthBarPool pool = UnitHealthBarPool.Instance;
+        if (pool == null)
+        {
+            if (!_pendingAcquire)
+            {
+                _pendingAcquire = true;
+                Debug.LogWarning($"[ActorBar] {name} 尚未找到 UnitHealthBarPool，将在 Start 再试。", this);
+            }
+
+            return;
+        }
+
+        _pendingAcquire = false;
+        _healthBar = pool.Get(headAnchor);
+        if (_healthBar == null)
+            return;
+
+        _healthBar.SetVisibilityRenderer(visibilityRenderer);
     }
 
     private void ResolveHeadAnchor()
