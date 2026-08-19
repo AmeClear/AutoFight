@@ -20,6 +20,7 @@ public class Player : Actor
         _input.Player.Move.performed += OnMove;
         _input.Player.Move.canceled += OnMove;
         _input.Player.Fire.performed += OnFire;
+        _input.Player.Fire.canceled += OnFire;
         _input.Player.Aim.performed += OnAim;
 
         if (moveComponent == null)
@@ -52,6 +53,7 @@ public class Player : Actor
         _input.Player.Move.performed -= OnMove;
         _input.Player.Move.canceled -= OnMove;
         _input.Player.Fire.performed -= OnFire;
+        _input.Player.Fire.canceled -= OnFire;
         _input.Player.Aim.performed -= OnAim;
         _input.Disable();
         _input.Dispose();
@@ -103,6 +105,19 @@ public class Player : Actor
 
     private void OnFire(InputAction.CallbackContext context)
     {
+        if (weaponHolder != null)
+        {
+            if (context.canceled)
+            {
+                weaponHolder.SetFireHeld(false);
+                return;
+            }
+
+            weaponHolder.SetFireHeld(true);
+            weaponHolder.TryFire();
+            return;
+        }
+
         asc.TryActivateAbility(GAbilityLib.Atk.Name);
     }
 

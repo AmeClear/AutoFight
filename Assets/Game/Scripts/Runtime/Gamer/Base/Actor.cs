@@ -6,12 +6,16 @@ public class Actor : MonoBehaviour
     protected AbilitySystemComponent asc;
     protected MoveComponent moveComponent;
     protected ActorBar healthBar;
+    protected WeaponHolder weaponHolder;
+
+    public WeaponHolder WeaponHolder => weaponHolder;
 
     private void Awake()
     {
         asc = GetComponent<AbilitySystemComponent>();
         moveComponent = GetComponent<MoveComponent>();
         healthBar = GetComponent<ActorBar>();
+        weaponHolder = GetComponent<WeaponHolder>();
         Init();
     }
 
