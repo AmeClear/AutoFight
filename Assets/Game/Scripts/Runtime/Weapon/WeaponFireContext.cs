@@ -9,6 +9,7 @@ public struct WeaponFireContext
     public WeaponInstance Weapon;
     public Vector3 Origin;
     public Vector3 Direction;
+    public Vector3 AimPoint;
     public float Range;
     public float RayRadius;
     public LayerMask HitMask;

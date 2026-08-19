@@ -200,5 +200,51 @@ namespace GAS.Runtime
             var halfAngle = angle * 0.5f;
             return Vector3.Angle(forward, planar) <= halfAngle;
         }
+
+        /// <summary>
+        /// 3D 射线 / 粗射线检测。结果按距离升序写入 <paramref name="hits"/>。
+        /// </summary>
+        /// <param name="origin">射线起点。</param>
+        /// <param name="direction">射线方向，会归一化。</param>
+        /// <param name="range">最大距离。</param>
+        /// <param name="radius">0 为细射线，大于 0 为 SphereCast 半径。</param>
+        /// <param name="hits">结果缓冲，需由调用方预分配。</param>
+        /// <param name="layerMask">检测层级。</param>
+        /// <param name="triggerInteraction">是否检测 Trigger。</param>
+        /// <returns>写入 <paramref name="hits"/> 的数量。</returns>
+        public static int Raycast3DNonAlloc(Vector3 origin, Vector3 direction, float range, float radius,
+            RaycastHit[] hits, int layerMask,
+            QueryTriggerInteraction triggerInteraction = QueryTriggerInteraction.Ignore)
+        {
+            if (hits == null || hits.Length == 0)
+                return 0;
+
+            if (range <= 0f || direction.sqrMagnitude < 0.0001f)
+                return 0;
+
+            direction.Normalize();
+            var count = radius > 0.0001f
+                ? Physics.SphereCastNonAlloc(origin, radius, direction, hits, range, layerMask, triggerInteraction)
+                : Physics.RaycastNonAlloc(origin, direction, hits, range, layerMask, triggerInteraction);
+
+            SortRaycastHitsByDistance(hits, count);
+            return count;
+        }
+
+        private static void SortRaycastHitsByDistance(RaycastHit[] hits, int count)
+        {
+            for (var i = 1; i < count; i++)
+            {
+                var key = hits[i];
+                var j = i - 1;
+                while (j >= 0 && hits[j].distance > key.distance)
+                {
+                    hits[j + 1] = hits[j];
+                    j--;
+                }
+
+                hits[j + 1] = key;
+            }
+        }
     }
 }

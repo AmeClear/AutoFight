@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d763af469c524557946c477b9bea3a46, type: 3}
   m_Name: GA_Fire
   m_EditorClassIdentifier: 
-  Description: 
-  UniqueName: 
+  Description: "TPS \u5C04\u7EBF\u5F00\u706B\uFF1A\u67AA\u53E3\u6307\u5411\u51C6\u661F\u843D\u70B9\uFF0CCatchRay3D
+    \u547D\u4E2D\u540E\u65BD\u52A0\u4F24\u5BB3 GE\u3002\u5C04\u901F\u4E0E\u5F39\u836F\u7531\u6B66\u5668\u5B9E\u4F8B\u8D1F\u8D23\uFF0C\u672C\u80FD\u529B\u4E0D\u8D70
+    CD\u3002"
+  UniqueName: GA_Fire
   Cost: {fileID: 0}
   Cooldown: {fileID: 0}
   CooldownTime: 0
@@ -24,10 +26,20 @@ MonoBehaviour:
   ActivationRequiredTags: []
   ActivationBlockedTags: []
   manualEndAbility: 0
-  FrameCount: 0
+  FrameCount: 1
   DurationalCues: []
   InstantCues: []
-  ReleaseGameplayEffect: []
+  ReleaseGameplayEffect:
+  - trackName: Hit
+    markEvents:
+    - startFrame: 0
+      jsonTargetCatcher:
+        Type: GAS.Runtime.CatchRay3D
+        Data: '{"Owner":{"instanceID":0},"checkLayer":{"serializedVersion":"2","m_Bits":2039},"useWeaponFireContext":true,"mergeCheckLayer":true,"fallbackRange":50.0,"fallbackRadius":0.0,"fallbackOriginOffset":{"x":0.0,"y":1.4,"z":0.4},"maxTargets":1,"pierceTargets":false,"stopOnBlocker":true,"drawDebug":false}'
+      gameplayEffectAssets:
+      - {fileID: 11400000, guid: 59c0e8c766767724c980461942a9b51d, type: 2}
+      - {fileID: 11400000, guid: 963b33a2d04267548930b807c03878b0, type: 2}
+      - {fileID: 11400000, guid: 960bb34f4cb8e5842841651384e9e8a3, type: 2}
   BuffGameplayEffects: []
   InstantTasks: []
   OngoingTasks: []

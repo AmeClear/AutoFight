@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 6733836191750822630}
   - component: {fileID: 5862580424708545978}
   - component: {fileID: 576108932738307894}
-  - component: {fileID: 3326101440059355985}
   - component: {fileID: 6064133219007807196}
+  - component: {fileID: 6162669542238644673}
+  - component: {fileID: 7045963268588449559}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -64,27 +65,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraModeController: {fileID: 0}
---- !u!135 &3326101440059355985
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 329789174737030071}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6064133219007807196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +90,51 @@ MonoBehaviour:
   applyGravity: 1
   gravity: -9.81
   groundedStickForce: -2
+--- !u!136 &6162669542238644673
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329789174737030071}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7045963268588449559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329789174737030071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb6510250477a94db44fd50b7156a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingWeapons:
+  - {fileID: 11400000, guid: f181162afb3e88e4482f102b26359fc9, type: 2}
+  muzzle: {fileID: 0}
+  muzzleFallbackOffset: {x: 0, y: 1.4, z: 0.4}
+  aimFromCrosshair: 1
+  aimCamera: {fileID: 0}
+  aimMask:
+    serializedVersion: 2
+    m_Bits: 2039
+  activateAbilityOnFire: 1
 --- !u!1 &2747355136232918235
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +311,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9089898452237961045}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &6121977064739791045
 MeshRenderer:
   m_ObjectHideFlags: 0
