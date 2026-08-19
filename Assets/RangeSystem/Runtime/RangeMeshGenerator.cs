@@ -53,7 +53,9 @@ public static class RangeMeshGenerator
         for (int i = 1; i <= actualResolution; i++)
         {
             float currentAngle = startAngle + (i - 1) * angleStep;
-            vertices[i] = new Vector3(Mathf.Cos(currentAngle) * radius, 0, Mathf.Sin(currentAngle) * radius);
+            // Unity 物体 forward 为 +Z。用 (-sin, 0, cos) 让张角中线对准 local forward，
+            // 等价于将原 +X 中线绕 Y 旋转 -90°，并保持原有绕序。
+            vertices[i] = new Vector3(-Mathf.Sin(currentAngle) * radius, 0, Mathf.Cos(currentAngle) * radius);
             uv[i] = new Vector2((Mathf.Cos(currentAngle) + 1) * 0.5f, (Mathf.Sin(currentAngle) + 1) * 0.5f);
         }
 

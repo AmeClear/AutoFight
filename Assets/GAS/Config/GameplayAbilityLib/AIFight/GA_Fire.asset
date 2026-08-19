@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d763af469c524557946c477b9bea3a46, type: 3}
-  m_Name: DamgeDP
+  m_Name: GA_Fire
   m_EditorClassIdentifier: 
   Description: 
-  UniqueName: DamgeDP
+  UniqueName: 
   Cost: {fileID: 0}
   Cooldown: {fileID: 0}
   CooldownTime: 0
@@ -27,15 +27,7 @@ MonoBehaviour:
   FrameCount: 0
   DurationalCues: []
   InstantCues: []
-  ReleaseGameplayEffect:
-  - trackName: 
-    markEvents:
-    - startFrame: 0
-      jsonTargetCatcher:
-        Type: GAS.Runtime.CatchSelf
-        Data: 
-      gameplayEffectAssets:
-      - {fileID: 11400000, guid: 814a14e7874a15e478d2b0e8654ab6dd, type: 2}
+  ReleaseGameplayEffect: []
   BuffGameplayEffects: []
   InstantTasks: []
   OngoingTasks: []
