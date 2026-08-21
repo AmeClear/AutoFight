@@ -98,6 +98,7 @@ public class Player : Actor
         cameraModeController.ActiveController.SetViewRotation(
             moveComponent.ViewYaw,
             moveComponent.ViewPitch);
+        cameraModeController.ActiveController.ApplyViewNow();
     }
 
     private void OnMove(InputAction.CallbackContext context)

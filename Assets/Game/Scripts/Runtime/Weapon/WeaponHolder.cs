@@ -205,13 +205,26 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
             return false;
         }
 
+        var muzzleToAim = context.AimPoint - context.Origin;
+        var muzzleRange = muzzleToAim.sqrMagnitude > 0.0001f
+            ? muzzleToAim.magnitude
+            : context.Range;
+        var cameraRange = context.HasCameraRay
+            ? Vector3.Distance(context.CameraOrigin, context.AimPoint)
+            : 0f;
+
         ray = new AbilityRayQuery
         {
             Origin = context.Origin,
             Direction = context.Direction,
-            Range = context.Range,
+            CameraOrigin = context.CameraOrigin,
+            CameraDirection = context.CameraDirection,
+            AimPoint = context.AimPoint,
+            Range = (muzzleRange > 0.01f ? muzzleRange : context.Range) + 0.05f,
+            CameraRange = cameraRange > 0.01f ? cameraRange : context.Range,
             Radius = context.RayRadius,
-            Mask = context.HitMask
+            Mask = context.HitMask,
+            HasCameraRay = context.HasCameraRay
         };
         return true;
     }
@@ -219,8 +232,8 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
     /// <summary>
     /// 构建当前武器的射线开火上下文。
     /// <para>
-        /// TPS 默认：从游戏摄像机穿过 UIAim.PointCenter 得到准星落点，开火方向为枪口指向该点。
-    /// 起点仍是枪口，保证弹道/特效从武器发出。
+    /// TPS：摄像机穿过屏幕正中准星得到目标点；枪口射线指向同一目标点。
+    /// 命中沿枪口到目标点检测。
     /// </para>
     /// </summary>
     public WeaponFireContext BuildFireContext()
@@ -229,7 +242,8 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
         var weapon = CurrentWeapon;
         var range = weapon != null ? weapon.Definition.Range : 0f;
         var origin = muzzle.position;
-        ResolveAim(origin, range, out var direction, out var aimPoint);
+        ResolveAim(origin, range, out var direction, out var aimPoint, out var cameraRay, out var aimNormal,
+            out var hasAimHit, out var hasCameraRay);
 
         return new WeaponFireContext
         {
@@ -238,14 +252,25 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
             Origin = origin,
             Direction = direction,
             AimPoint = aimPoint,
+            CameraOrigin = cameraRay.origin,
+            CameraDirection = cameraRay.direction,
+            AimNormal = aimNormal,
+            HasAimHit = hasAimHit,
+            HasCameraRay = hasCameraRay,
             Range = range,
             RayRadius = weapon != null ? weapon.Definition.RayRadius : 0f,
-            HitMask = weapon != null ? weapon.Definition.HitMask : (LayerMask)~0
+            HitMask = weapon != null ? (LayerMask)(weapon.Definition.HitMask | aimMask) : aimMask
         };
     }
 
-    private void ResolveAim(Vector3 muzzleOrigin, float range, out Vector3 direction, out Vector3 aimPoint)
+    private void ResolveAim(Vector3 muzzleOrigin, float range, out Vector3 direction, out Vector3 aimPoint,
+        out Ray cameraRay, out Vector3 aimNormal, out bool hasAimHit, out bool hasCameraRay)
     {
+        cameraRay = new Ray(muzzleOrigin, muzzle.forward);
+        aimNormal = Vector3.up;
+        hasAimHit = false;
+        hasCameraRay = false;
+
         if (!aimFromCrosshair)
         {
             direction = muzzle.forward;
@@ -261,7 +286,8 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
             return;
         }
 
-        var cameraRay = CrosshairAim.GetAimRay(cam);
+        cameraRay = CrosshairAim.GetAimRay(cam);
+        hasCameraRay = true;
         aimPoint = cameraRay.origin + cameraRay.direction * range;
 
         var hitCount = Physics.RaycastNonAlloc(cameraRay, AimHits, range, aimMask, QueryTriggerInteraction.Ignore);
@@ -277,6 +303,8 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
 
             bestDistance = hit.distance;
             aimPoint = hit.point;
+            aimNormal = hit.normal;
+            hasAimHit = true;
         }
 
         var toAim = aimPoint - muzzleOrigin;
@@ -290,6 +318,10 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
     {
         if (aimCamera != null)
             return aimCamera;
+
+        var mode = Camera.main != null ? Camera.main.GetComponent<CameraModeController>() : null;
+        if (mode != null && mode.ActiveCamera != null)
+            return mode.ActiveCamera;
 
         return Camera.main;
     }

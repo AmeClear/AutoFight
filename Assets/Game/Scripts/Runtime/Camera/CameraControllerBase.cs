@@ -61,7 +61,18 @@ public abstract class CameraControllerBase : MonoBehaviour
     }
 
     /// <summary>
-    /// 穿过准星 PointCenter 的瞄准射线。未绑定准星时退回屏幕中心。
+    /// 立刻按当前 yaw/pitch 摆好镜头，供同帧开火射线使用。
+    /// </summary>
+    public void ApplyViewNow()
+    {
+        if (target == null || !isActiveAndEnabled)
+            return;
+
+        UpdateCameraTransform();
+    }
+
+    /// <summary>
+    /// 穿过屏幕正中准星的瞄准射线。
     /// </summary>
     public Ray GetAimRay()
     {

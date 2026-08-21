@@ -579,10 +579,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa66d6a38581f9f4f9b93889418c1679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarPrefab: {fileID: 546205112960623738, guid: a5d0c02efb380c94abec91f7db3446ee, type: 3}
-  healthBarRoot: {fileID: 2102603253}
-  targetCamera: {fileID: 777199356}
-  prewarmCount: 0
 --- !u!1 &777199354
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,7 +711,7 @@ MonoBehaviour:
   shoulderOffset: {x: 0.65, y: 0.15}
   adsShoulderOffset: {x: 0.35, y: 0.08}
   adsDistance: 2.2
-  alignToCrosshair: 1
+  alignToCrosshair: 0
   lookAheadDistance: 25
   adsFov: 40
   aimBlendSpeed: 10
@@ -1038,18 +1034,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 329789174737030071, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 576108932738307894, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}
       propertyPath: cameraModeController
       value: 
       objectReference: {fileID: 777199360}
-    - target: {fileID: 5862580424708545978, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}
-      propertyPath: preset
-      value: 
-      objectReference: {fileID: 11400000, guid: ef56bb4ddb391824c90aa6bb318d75fb, type: 2}
     - target: {fileID: 6733836191750822630, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1094,13 +1082,16 @@ PrefabInstance:
       propertyPath: aimCamera
       value: 
       objectReference: {fileID: 777199356}
-    - target: {fileID: 7045963268588449559, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}
-      propertyPath: aimMask.m_Bits
-      value: 256
+    - target: {fileID: 7848208771652826466, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 7848208771652826466, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5878492146798392296, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b55bf34121ca10c42a40b222992e8f3a, type: 3}

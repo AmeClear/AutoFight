@@ -12,7 +12,7 @@ public class CuePaintDecal : GameplayCueInstant
 {
     [BoxGroup("射线")]
     [LabelText("使用武器开火射线")]
-    [Tooltip("从 Owner 上的 IAbilityRayProvider 取枪口到准星的射线。关闭则用角色朝向。")]
+    [Tooltip("从 Owner 上的 IAbilityRayProvider 取枪口到准星目标点的射线。关闭则用角色朝向。")]
     public bool useWeaponRay = true;
 
     [BoxGroup("射线")]
@@ -126,34 +126,27 @@ public class CuePaintDecalSpec : GameplayCueInstantSpec<CuePaintDecal>
     private bool TryBuildRay(out Vector3 origin, out Vector3 direction, out float range, out float radius,
         out LayerMask mask)
     {
-        origin = Owner.transform.position;
+        origin = Owner.transform.TransformPoint(new Vector3(0f, 1.4f, 0.4f));
         direction = Owner.transform.forward;
         range = 50f;
         radius = 0f;
         mask = cue.hitMask;
 
-        if (cue.useWeaponRay)
-        {
-            var provider = Owner.GetComponentInParent<IAbilityRayProvider>() ??
-                           Owner.GetComponentInChildren<IAbilityRayProvider>();
-            if (provider != null &&
-                provider.TryGetAbilityRay(out var query) &&
-                query.Direction.sqrMagnitude > 0.0001f)
-            {
-                origin = query.Origin;
-                direction = query.Direction;
-                range = query.Range > 0f ? query.Range : range;
-                radius = query.Radius;
-                if (cue.mergeWeaponMask)
-                    mask = (LayerMask)(query.Mask | cue.hitMask);
-                else
-                    mask = query.Mask;
-                return true;
-            }
-        }
+        if (!cue.useWeaponRay)
+            return true;
 
-        origin = Owner.transform.TransformPoint(new Vector3(0f, 1.4f, 0.4f));
-        direction = Owner.transform.forward;
+        var provider = Owner.GetComponentInParent<IAbilityRayProvider>() ??
+                       Owner.GetComponentInChildren<IAbilityRayProvider>();
+        if (provider == null ||
+            !provider.TryGetAbilityRay(out var query) ||
+            query.Direction.sqrMagnitude < 0.0001f)
+            return true;
+
+        origin = query.Origin;
+        direction = query.Direction;
+        range = query.Range > 0f ? query.Range : range;
+        radius = query.Radius;
+        mask = cue.mergeWeaponMask ? (LayerMask)(query.Mask | cue.hitMask) : query.Mask;
         return true;
     }
 }

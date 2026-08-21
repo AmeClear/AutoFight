@@ -133,7 +133,7 @@ MonoBehaviour:
   aimCamera: {fileID: 0}
   aimMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2039
   activateAbilityOnFire: 1
 --- !u!1 &2747355136232918235
 GameObject:

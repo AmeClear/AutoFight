@@ -5,9 +5,10 @@ using UnityEngine;
 namespace GAS.Runtime
 {
     /// <summary>
-    /// 3D 射线命中：从枪口沿开火方向检测，收集带有 <see cref="AbilitySystemComponent"/> 的目标。
+    /// 3D 射线命中：从枪口指向准星目标点检测，收集带有 <see cref="AbilitySystemComponent"/> 的目标。
     /// <para>
-    /// 优先使用拥有者上的 <see cref="IAbilityRayProvider"/>（TPS 下为枪口指向准星落点）。
+    /// 优先使用拥有者上的 <see cref="IAbilityRayProvider"/>。
+    /// TPS 下同时存在摄像机到目标点、枪口到目标点两条射线；命中沿枪口这条。
     /// 没有武器上下文时，退回拥有者朝向与 Catcher 上的后备参数。
     /// </para>
     /// </summary>
@@ -77,7 +78,19 @@ namespace GAS.Runtime
             }
 
             if (drawDebug)
-                DebugExtension.DrawLine(query.Origin, endPoint, Color.red, 1f);
+                DrawDebugRays(query, endPoint);
+        }
+
+        private static void DrawDebugRays(in AbilityRayQuery query, Vector3 muzzleEnd)
+        {
+            var target = query.AimPoint.sqrMagnitude > 0.0001f || query.HasCameraRay
+                ? query.AimPoint
+                : muzzleEnd;
+
+            DebugExtension.DrawLine(query.Origin, target, new Color(1f, 0.35f, 0.1f), 1f);
+
+            if (query.HasCameraRay && query.CameraDirection.sqrMagnitude > 0.0001f)
+                DebugExtension.DrawLine(query.CameraOrigin, target, Color.cyan, 1f);
         }
 
         private bool TryBuildQuery(out AbilityRayQuery query)

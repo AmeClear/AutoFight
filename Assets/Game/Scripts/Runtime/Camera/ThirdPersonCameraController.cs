@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// 过肩第三人称摄像机：镜头沿视角旋转，角色偏在一侧，视口中心对准 UIAim 的 PointCenter。
+/// 过肩第三人称摄像机：镜头沿视角旋转，角色偏在一侧，屏幕正中即瞄准方向。
 /// </summary>
 public class ThirdPersonCameraController : CameraControllerBase
 {
@@ -19,8 +19,8 @@ public class ThirdPersonCameraController : CameraControllerBase
     private float adsDistance = 2.2f;
 
     [Header("准星对齐")]
-    [SerializeField] [Tooltip("把瞄准方向上的预瞄点投影到 PointCenter，而不是屏幕正中。")]
-    private bool alignToCrosshair = true;
+    [SerializeField] [Tooltip("默认关闭。开启后会按 PointCenter 平移镜头，容易和屏幕中心准星错开。")]
+    private bool alignToCrosshair;
     [SerializeField] [Tooltip("用于对齐准星的预瞄距离。越大，准星越接近镜头朝向。")]
     private float lookAheadDistance = 25f;
 
@@ -80,10 +80,8 @@ public class ThirdPersonCameraController : CameraControllerBase
             desiredPosition += ComputeCrosshairFramingOffset(desiredPosition, lookRotation, pivot);
 
         var positionLerp = 1f - Mathf.Exp(-positionSmooth * dt);
-        var rotationLerp = 1f - Mathf.Exp(-rotationSmooth * dt);
-
         transform.position = Vector3.Lerp(transform.position, desiredPosition, positionLerp);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationLerp);
+        transform.rotation = lookRotation;
 
         if (cameraComponent != null)
             cameraComponent.fieldOfView = Mathf.Lerp(_defaultFov, adsFov, _aimBlend);
