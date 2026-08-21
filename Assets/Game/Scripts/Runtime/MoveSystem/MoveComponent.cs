@@ -126,6 +126,15 @@ public class MoveComponent : MonoBehaviour
         _viewPitch = Mathf.Clamp(pitch, minPitch, maxPitch);
     }
 
+    public void AddViewRotation(float yawDelta, float pitchDelta)
+    {
+        if (yawDelta == 0f && pitchDelta == 0f)
+            return;
+
+        _viewYaw += yawDelta;
+        _viewPitch = Mathf.Clamp(_viewPitch + pitchDelta, minPitch, maxPitch);
+    }
+
     public void SetMoveInput(Vector2 input)
     {
         _moveInput = new Vector3(input.x, 0f, input.y);

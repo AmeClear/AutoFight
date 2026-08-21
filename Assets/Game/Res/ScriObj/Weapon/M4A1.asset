@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponId: 10000
   displayName: M4A1
   fireMode: 1
-  fireInterval: 0.2
+  fireRateRpm: 780
   infiniteAmmo: 0
   magazineSize: 30
   maxReserveAmmo: 60
@@ -28,3 +28,98 @@ MonoBehaviour:
     m_Bits: 384
   abilityAsset: {fileID: 11400000, guid: 0409e1847bae70c4fbccfeab79e90dda, type: 2}
   abilityName: GA_Fire
+  recoilEnabled: 1
+  verticalRecoil: 0.85
+  horizontalRecoil: 0.28
+  horizontalBias: 0.15
+  recoilRandomness: 0.15
+  adsRecoilScale: 0.6
+  verticalRecoilPattern:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.7
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1.15
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  horizontalRecoilPattern:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.25
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.55
+      value: -0.75
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.8
+      value: 0.85
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: -0.35
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  recoilRecoveryDelay: 0.08
+  recoilRecoverySpeed: 8
+  recoilResetTime: 0.28
+  maxVerticalRecoil: 12
+  maxHorizontalRecoil: 6

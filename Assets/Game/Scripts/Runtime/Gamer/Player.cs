@@ -66,7 +66,13 @@ public class Player : Actor
         if (moveComponent == null || Mouse.current == null)
             return;
 
+        var yaw = moveComponent.ViewYaw;
+        var pitch = moveComponent.ViewPitch;
         moveComponent.AddLookInput(Mouse.current.delta.ReadValue());
+        if (weaponHolder != null)
+            weaponHolder.Recoil.AbsorbLook(
+                moveComponent.ViewYaw - yaw,
+                moveComponent.ViewPitch - pitch);
     }
 
     private void ApplyCameraModeRules()

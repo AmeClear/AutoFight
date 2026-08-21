@@ -40,6 +40,7 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
     private bool _fireHeld;
     private bool _hasPreparedFireContext;
     private WeaponFireContext _preparedFireContext;
+    private readonly WeaponRecoil _recoil = new WeaponRecoil();
 
     public Actor Owner => _actor;
     public WeaponInstance CurrentWeapon =>
@@ -48,11 +49,13 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
     public IReadOnlyList<WeaponInstance> Weapons => _weapons;
     public Transform Muzzle => muzzle;
     public bool IsFireHeld => _fireHeld;
+    public WeaponRecoil Recoil => _recoil;
 
     private void Awake()
     {
         _actor = GetComponent<Actor>();
         _asc = GetComponent<AbilitySystemComponent>();
+        _recoil.Bind(GetComponent<MoveComponent>());
         EnsureMuzzle();
         CreateStartingWeapons();
     }
@@ -61,8 +64,17 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
     {
         TickCurrentWeapon(Time.deltaTime);
 
+        var now = Time.time;
+        var recoilMoved = _recoil.Tick(
+            CurrentWeapon != null ? CurrentWeapon.Definition : null,
+            Time.deltaTime,
+            now,
+            _fireHeld);
+
         if (_fireHeld && CurrentWeapon != null && CurrentWeapon.Definition.FireMode == WeaponFireMode.FullAuto)
             TryFire();
+        else if (recoilMoved)
+            PushRecoilView();
     }
 
     /// <summary>
@@ -102,6 +114,8 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
         }
 
         weapon.ConsumeShot(time);
+        if (_recoil.Kick(weapon.Definition, IsAiming(), time))
+            PushRecoilView();
         PublishFired(weapon, context);
         PublishAmmoChanged(weapon);
 
@@ -119,6 +133,8 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
         var weapon = CurrentWeapon;
         if (weapon == null || !weapon.BeginReload())
             return false;
+
+        _recoil.ResetBurst();
 
         EventBus.Publish(new WeaponReloadStartedEvent
         {
@@ -170,6 +186,7 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
         var previous = CurrentWeapon;
         previous?.CancelReload();
         _currentIndex = index;
+        _recoil.ResetBurst();
 
         EventBus.Publish(new WeaponSwitchedEvent
         {
@@ -324,6 +341,25 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
             return mode.ActiveCamera;
 
         return Camera.main;
+    }
+
+    private bool IsAiming()
+    {
+        var cam = ResolveAimCamera();
+        var mode = cam != null ? cam.GetComponent<CameraModeController>() : null;
+        return mode != null && mode.IsAiming;
+    }
+
+    private void PushRecoilView()
+    {
+        var move = GetComponent<MoveComponent>();
+        var cam = ResolveAimCamera();
+        var mode = cam != null ? cam.GetComponent<CameraModeController>() : null;
+        if (move == null || mode?.ActiveController == null)
+            return;
+
+        mode.ActiveController.SetViewRotation(move.ViewYaw, move.ViewPitch);
+        mode.ActiveController.ApplyViewNow();
     }
 
     private bool IsOwnedCollider(Collider col)

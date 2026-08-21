@@ -23,10 +23,13 @@ public class WeaponDefinition : ScriptableObject
     [EnumToggleButtons]
     [SerializeField] private WeaponFireMode fireMode = WeaponFireMode.SemiAuto;
 
-    [BoxGroup("基本/开火/射速"), LabelText("开火间隔"), SuffixLabel("秒", true)]
-    [Tooltip("两次有效开火之间的最短间隔。数值越小射速越快。")]
-    [MinValue(0.01f)]
-    [SerializeField] private float fireInterval = 0.2f;
+    [BoxGroup("基本/开火/射速"), LabelText("射速"), SuffixLabel("RPM", true)]
+    [Tooltip("每分钟发射的子弹数量（Rounds Per Minute）。例如 600 RPM 为每秒 10 发。")]
+    [MinValue(1)]
+    [SerializeField] private int fireRateRpm = 300;
+
+    [BoxGroup("基本/开火/射速"), ShowInInspector, ReadOnly, LabelText("开火间隔"), SuffixLabel("秒", true)]
+    private float FireIntervalPreview => FireInterval;
 
     [BoxGroup("基本/开火/弹药"), LabelText("无限弹药"), ToggleLeft]
     [Tooltip("开启后不消耗弹匣与备用弹，换弹逻辑也不会生效。")]
@@ -75,6 +78,77 @@ public class WeaponDefinition : ScriptableObject
     [Tooltip("开火成功后激活的 GAS 技能 UniqueName。开火技能为空时使用该名称。留空则只扣弹、不走 GAS。")]
     [SerializeField] private string abilityName = "GA_Fire";
 
+    [TabGroup("基本", "后坐")]
+    [BoxGroup("基本/后坐/开关"), LabelText("启用后坐"), ToggleLeft]
+    [Tooltip("开火后把后坐力写进视角，准星随之后抬/偏移。关闭则弹着点完全跟手。")]
+    [SerializeField] private bool recoilEnabled = true;
+
+    [BoxGroup("基本/后坐/强度"), LabelText("垂直后坐"), SuffixLabel("度/发", true), ShowIf("recoilEnabled")]
+    [Tooltip("每一发让准星上抬的基础角度。连发时再乘垂直曲线。")]
+    [MinValue(0f)]
+    [SerializeField] private float verticalRecoil = 0.85f;
+
+    [BoxGroup("基本/后坐/强度"), LabelText("水平后坐"), SuffixLabel("度/发", true), ShowIf("recoilEnabled")]
+    [Tooltip("每一发左右偏移的基础角度，再乘水平曲线。正值向右。")]
+    [MinValue(0f)]
+    [SerializeField] private float horizontalRecoil = 0.28f;
+
+    [BoxGroup("基本/后坐/强度"), LabelText("水平偏向"), ShowIf("recoilEnabled")]
+    [Tooltip("在 -1（左）到 1（右）之间，连发时额外往一侧拉。")]
+    [Range(-1f, 1f)]
+    [SerializeField] private float horizontalBias = 0.15f;
+
+    [BoxGroup("基本/后坐/强度"), LabelText("随机幅度"), ShowIf("recoilEnabled")]
+    [Tooltip("在基础后坐上叠加的比例抖动。0 为固定弹道，0.2 表示 ±20%。")]
+    [Range(0f, 1f)]
+    [SerializeField] private float recoilRandomness = 0.15f;
+
+    [BoxGroup("基本/后坐/强度"), LabelText("开镜后坐倍率"), ShowIf("recoilEnabled")]
+    [Tooltip("开镜时后坐乘这个系数。小于 1 表示开镜更稳。")]
+    [MinValue(0f)]
+    [SerializeField] private float adsRecoilScale = 0.6f;
+
+    [BoxGroup("基本/后坐/曲线"), LabelText("垂直曲线"), ShowIf("recoilEnabled")]
+    [Tooltip("横轴为弹匣进度 0–1，纵轴为垂直后坐倍率。前几发可压低，后续抬高。")]
+    [SerializeField] private AnimationCurve verticalRecoilPattern = new AnimationCurve(
+        new Keyframe(0f, 0.7f),
+        new Keyframe(0.2f, 1f),
+        new Keyframe(1f, 1.15f));
+
+    [BoxGroup("基本/后坐/曲线"), LabelText("水平曲线"), ShowIf("recoilEnabled")]
+    [Tooltip("横轴为弹匣进度 0–1，纵轴为水平方向倍率。负值向左，正值向右，用来做弹道。")]
+    [SerializeField] private AnimationCurve horizontalRecoilPattern = new AnimationCurve(
+        new Keyframe(0f, 0.2f),
+        new Keyframe(0.25f, 1f),
+        new Keyframe(0.55f, -0.75f),
+        new Keyframe(0.8f, 0.85f),
+        new Keyframe(1f, -0.35f));
+
+    [BoxGroup("基本/后坐/恢复"), LabelText("回正延迟"), SuffixLabel("秒", true), ShowIf("recoilEnabled")]
+    [Tooltip("最后一发之后，过多久开始把视角拉回压枪前的方向。")]
+    [MinValue(0f)]
+    [SerializeField] private float recoilRecoveryDelay = 0.08f;
+
+    [BoxGroup("基本/后坐/恢复"), LabelText("回正速度"), ShowIf("recoilEnabled")]
+    [Tooltip("指数回正速率。越大回正越快。")]
+    [MinValue(0f)]
+    [SerializeField] private float recoilRecoverySpeed = 8f;
+
+    [BoxGroup("基本/后坐/恢复"), LabelText("连发重置"), SuffixLabel("秒", true), ShowIf("recoilEnabled")]
+    [Tooltip("停火超过该时间后，弹道进度从第一发重新算。")]
+    [MinValue(0f)]
+    [SerializeField] private float recoilResetTime = 0.28f;
+
+    [BoxGroup("基本/后坐/上限"), LabelText("垂直上限"), SuffixLabel("度", true), ShowIf("recoilEnabled")]
+    [Tooltip("一次连发中最多上抬的角度，防止准星甩出屏幕。")]
+    [MinValue(0f)]
+    [SerializeField] private float maxVerticalRecoil = 12f;
+
+    [BoxGroup("基本/后坐/上限"), LabelText("水平上限"), SuffixLabel("度", true), ShowIf("recoilEnabled")]
+    [Tooltip("一次连发中左右累计偏移的上限。")]
+    [MinValue(0f)]
+    [SerializeField] private float maxHorizontalRecoil = 6f;
+
     /// <summary>武器的唯一标识，用于存档、装备查找与事件区分。</summary>
     public string WeaponId => weaponId;
 
@@ -84,8 +158,11 @@ public class WeaponDefinition : ScriptableObject
     /// <summary>开火模式：单发或连发。</summary>
     public WeaponFireMode FireMode => fireMode;
 
-    /// <summary>两次有效开火之间的最短间隔（秒）。</summary>
-    public float FireInterval => fireInterval;
+    /// <summary>每分钟发射的子弹数量（Rounds Per Minute）。</summary>
+    public int FireRateRpm => Mathf.Max(1, fireRateRpm);
+
+    /// <summary>两次有效开火之间的最短间隔（秒），由射速换算：60 / RPM。</summary>
+    public float FireInterval => 60f / FireRateRpm;
 
     /// <summary>是否不消耗弹药。</summary>
     public bool InfiniteAmmo => infiniteAmmo;
@@ -119,4 +196,18 @@ public class WeaponDefinition : ScriptableObject
         abilityAsset != null && !string.IsNullOrEmpty(abilityAsset.UniqueName)
             ? abilityAsset.UniqueName
             : abilityName;
+
+    public bool RecoilEnabled => recoilEnabled;
+    public float VerticalRecoil => Mathf.Max(0f, verticalRecoil);
+    public float HorizontalRecoil => Mathf.Max(0f, horizontalRecoil);
+    public float HorizontalBias => Mathf.Clamp(horizontalBias, -1f, 1f);
+    public float RecoilRandomness => Mathf.Clamp01(recoilRandomness);
+    public float AdsRecoilScale => Mathf.Max(0f, adsRecoilScale);
+    public AnimationCurve VerticalRecoilPattern => verticalRecoilPattern;
+    public AnimationCurve HorizontalRecoilPattern => horizontalRecoilPattern;
+    public float RecoilRecoveryDelay => Mathf.Max(0f, recoilRecoveryDelay);
+    public float RecoilRecoverySpeed => Mathf.Max(0f, recoilRecoverySpeed);
+    public float RecoilResetTime => Mathf.Max(0f, recoilResetTime);
+    public float MaxVerticalRecoil => Mathf.Max(0f, maxVerticalRecoil);
+    public float MaxHorizontalRecoil => Mathf.Max(0f, maxHorizontalRecoil);
 }
