@@ -16,18 +16,6 @@ MonoBehaviour:
   - _id: 1
     _name: Root
     _depth: -1
-  - _id: 9
-    _name: FightJudge
-    _depth: 0
-  - _id: 25
-    _name: Def
-    _depth: 1
-  - _id: 24
-    _name: Atk
-    _depth: 1
-  - _id: 19
-    _name: Avoid
-    _depth: 1
   - _id: 5
     _name: Ability
     _depth: 0
@@ -47,29 +35,6 @@ MonoBehaviour:
     _name: Enemy
     _depth: 1
   Tags:
-  - _name: FightJudge
-    _hashCode: -309433107
-    _shortName: FightJudge
-    _ancestorHashCodes: 
-    _ancestorNames: []
-  - _name: FightJudge.Def
-    _hashCode: 137644234
-    _shortName: Def
-    _ancestorHashCodes: ed6c8eed
-    _ancestorNames:
-    - FightJudge
-  - _name: FightJudge.Atk
-    _hashCode: 1959202001
-    _shortName: Atk
-    _ancestorHashCodes: ed6c8eed
-    _ancestorNames:
-    - FightJudge
-  - _name: FightJudge.Avoid
-    _hashCode: -1236170836
-    _shortName: Avoid
-    _ancestorHashCodes: ed6c8eed
-    _ancestorNames:
-    - FightJudge
   - _name: Ability
     _hashCode: -523153736
     _shortName: Ability

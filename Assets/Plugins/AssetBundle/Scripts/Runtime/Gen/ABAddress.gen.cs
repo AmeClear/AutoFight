@@ -17,22 +17,10 @@ namespace ABSystem
         public static class Prefab
         {
             /// <summary>
-            /// Assets/GameUI/Res/Prefabs/BarUI.prefab
-            /// <para>Address = Assets/GameUI/Res/Prefabs/BarUI.prefab</para>
+            /// Assets/GameUI/Res/Prefabs/UIAim.prefab
+            /// <para>Address = UIAim</para>
             /// </summary>
-            public const string BarUI = "Assets/GameUI/Res/Prefabs/BarUI.prefab";
-
-            /// <summary>
-            /// Assets/GameUI/Res/Prefabs/UISkill.prefab
-            /// <para>Address = Assets/GameUI/Res/Prefabs/UISkill.prefab</para>
-            /// </summary>
-            public const string UISkill = "Assets/GameUI/Res/Prefabs/UISkill.prefab";
-
-            /// <summary>
-            /// Assets/Game/Res/Prefabs/3DUI/UnitHealthBar.prefab
-            /// <para>Address = Assets/Game/Res/Prefabs/3DUI/UnitHealthBar.prefab</para>
-            /// </summary>
-            public const string UnitHealthBar = "Assets/Game/Res/Prefabs/3DUI/UnitHealthBar.prefab";
+            public const string UIAim = "UIAim";
 
         }
 
@@ -41,9 +29,7 @@ namespace ABSystem
         /// </summary>
         public static readonly string[] All =
         {
-            Prefab.BarUI,
-            Prefab.UISkill,
-            Prefab.UnitHealthBar,
+            Prefab.UIAim,
         };
 
         /// <summary>
@@ -51,9 +37,7 @@ namespace ABSystem
         /// </summary>
         public static readonly ABAddressInfo[] Infos =
         {
-            new ABAddressInfo("BarUI", "BarUI.prefab", "BarUI", "Assets/GameUI/Res/Prefabs/BarUI.prefab", Prefab.BarUI, "Prefab"),
-            new ABAddressInfo("UISkill", "UISkill.prefab", "UISkill", "Assets/GameUI/Res/Prefabs/UISkill.prefab", Prefab.UISkill, "Prefab"),
-            new ABAddressInfo("UnitHealthBar", "UnitHealthBar.prefab", "UnitHealthBar", "Assets/Game/Res/Prefabs/3DUI/UnitHealthBar.prefab", Prefab.UnitHealthBar, "Prefab"),
+            new ABAddressInfo("UIAim", "UIAim.prefab", "UIAim", "Assets/GameUI/Res/Prefabs/UIAim.prefab", Prefab.UIAim, "Prefab"),
         };
     }
 }

@@ -22,6 +22,7 @@ public class Player : Actor
         _input.Player.Fire.performed += OnFire;
         _input.Player.Fire.canceled += OnFire;
         _input.Player.Aim.performed += OnAim;
+        _input.Player.Aim.canceled += OnAim;
 
         if (moveComponent == null)
             Debug.LogWarning($"[Player] {name} 缺少 MoveComponent，移动输入将被忽略。", this);
@@ -55,6 +56,7 @@ public class Player : Actor
         _input.Player.Fire.performed -= OnFire;
         _input.Player.Fire.canceled -= OnFire;
         _input.Player.Aim.performed -= OnAim;
+        _input.Player.Aim.canceled -= OnAim;
         _input.Disable();
         _input.Dispose();
     }
@@ -75,7 +77,9 @@ public class Player : Actor
         BodyRotationMode desiredMode = cameraModeController.CurrentMode switch
         {
             CameraControlMode.FirstPerson => BodyRotationMode.FaceViewYaw,
-            CameraControlMode.ThirdPerson => BodyRotationMode.FaceMoveDirection,
+            CameraControlMode.ThirdPerson => cameraModeController.IsAiming
+                ? BodyRotationMode.FaceViewYaw
+                : BodyRotationMode.FaceMoveDirection,
             _ => BodyRotationMode.None
         };
 
@@ -118,12 +122,17 @@ public class Player : Actor
             return;
         }
 
-        asc.TryActivateAbility(GAbilityLib.Atk.Name);
     }
 
     private void OnAim(InputAction.CallbackContext context)
     {
-        asc.TryActivateAbility(GAbilityLib.Def.Name);
+        if (cameraModeController == null)
+            return;
+
+        if (context.canceled)
+            cameraModeController.SetAiming(false);
+        else if (context.performed)
+            cameraModeController.SetAiming(true);
     }
     protected override void OnHpChange(AttributeBase attributeBase, float oldValue, float newValue)
     {

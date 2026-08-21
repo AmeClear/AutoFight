@@ -31,3 +31,4 @@ MonoBehaviour:
   - ScrollRect
   - Toggle
   - Transform
+  - RectTransform

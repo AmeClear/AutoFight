@@ -22,15 +22,6 @@ MonoBehaviour:
     MinValue: 0
     LimitMaxValue: 1
     MaxValue: 100
-  - Name: AttackValue
-    Comment: 
-    CalculateMode: 0
-    SupportedOperation: 31
-    DefaultValue: 10
-    LimitMinValue: 1
-    MinValue: 0
-    LimitMaxValue: 0
-    MaxValue: 3.4028235e+38
   - Name: StamValue
     Comment: "\u4F53\u529B"
     CalculateMode: 0
@@ -38,14 +29,14 @@ MonoBehaviour:
     DefaultValue: 100
     LimitMinValue: 1
     MinValue: 0
-    LimitMaxValue: 1
-    MaxValue: 3.4028235e+38
+    LimitMaxValue: 0
+    MaxValue: 100
   - Name: DefProgress
-    Comment: "\u9632\u5FA1\u6761"
+    Comment: "\u62A4\u7532"
     CalculateMode: 0
     SupportedOperation: 31
-    DefaultValue: 100
+    DefaultValue: 0
     LimitMinValue: 1
     MinValue: 0
-    LimitMaxValue: 1
+    LimitMaxValue: 0
     MaxValue: 100

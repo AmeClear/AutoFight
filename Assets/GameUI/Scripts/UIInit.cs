@@ -13,10 +13,10 @@ public class UIInit : MonoBehaviour
         // 分组常量
         await ABGroup.PreloadAsync(ABGroup.Prefab);
         UIModule.Instance.Initialize(GetUIView);
-        UIModule.Instance.PreLoadWindow<BarUI>();
-        UIModule.Instance.PreLoadWindow<UISkill>();
-        UIModule.Instance.PopUpWindow<BarUI>();
-        UIModule.Instance.PopUpWindow<UISkill>();
+        UIModule.Instance.PopUpWindow<UIAim>();
+        //UIModule.Instance.PreLoadWindow<UISkill>();
+        //UIModule.Instance.PopUpWindow<BarUI>();
+        //UIModule.Instance.PopUpWindow<UISkill>();
 
     }
 

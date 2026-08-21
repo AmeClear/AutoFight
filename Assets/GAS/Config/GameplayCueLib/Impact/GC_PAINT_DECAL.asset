@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e4b2a17f6d4c3e9a5b0d1e7f3c2846, type: 3}
+  m_Name: GC_PAINT_DECAL
+  m_EditorClassIdentifier: 
+  Description: "\u5F00\u706B Instant Cue\uFF1A\u6CBF\u6B66\u5668\u5C04\u7EBF\u5728\u547D\u4E2D\u8868\u9762\u5237\u989C\u6599\u5F39\u75D5\u3002"
+  RequiredTags: []
+  ImmunityTags: []
+  useWeaponRay: 1
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 2039
+  mergeWeaponMask: 1
+  colors:
+  - {r: 1, g: 0.18, b: 0.38, a: 1}
+  - {r: 0.15, g: 0.75, b: 1, a: 1}
+  - {r: 1, g: 0.85, b: 0.12, a: 1}
+  - {r: 0.35, g: 0.95, b: 0.28, a: 1}
+  - {r: 1, g: 0.45, b: 0.08, a: 1}
+  - {r: 0.72, g: 0.28, b: 1, a: 1}
+  minSize: 0.18
+  maxSize: 0.42
+  surfaceOffset: 0.02
+  attachToHit: 1
+  paintShader: {fileID: 4800000, guid: e8c3a91f4b7d4e6a9c2d1f0b5a7e3842, type: 3}
+  lifetime: 8
+  fadeDuration: 1.6

@@ -219,7 +219,7 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
     /// <summary>
     /// 构建当前武器的射线开火上下文。
     /// <para>
-    /// TPS 默认：摄像机从屏幕中心打射线得到准星落点，开火方向为枪口指向该点。
+        /// TPS 默认：从游戏摄像机穿过 UIAim.PointCenter 得到准星落点，开火方向为枪口指向该点。
     /// 起点仍是枪口，保证弹道/特效从武器发出。
     /// </para>
     /// </summary>
@@ -261,7 +261,7 @@ public class WeaponHolder : MonoBehaviour, IAbilityRayProvider
             return;
         }
 
-        var cameraRay = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        var cameraRay = CrosshairAim.GetAimRay(cam);
         aimPoint = cameraRay.origin + cameraRay.direction * range;
 
         var hitCount = Physics.RaycastNonAlloc(cameraRay, AimHits, range, aimMask, QueryTriggerInteraction.Ignore);

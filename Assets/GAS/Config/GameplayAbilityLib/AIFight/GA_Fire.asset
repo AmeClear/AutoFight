@@ -28,18 +28,20 @@ MonoBehaviour:
   manualEndAbility: 0
   FrameCount: 1
   DurationalCues: []
-  InstantCues: []
+  InstantCues:
+  - trackName: Paint
+    markEvents:
+    - startFrame: 0
+      cues:
+      - {fileID: 11400000, guid: 9f3e7c1a5b284d6e8a0c2d4f6b8e1a30, type: 2}
   ReleaseGameplayEffect:
   - trackName: Hit
     markEvents:
     - startFrame: 0
       jsonTargetCatcher:
         Type: GAS.Runtime.CatchRay3D
-        Data: '{"Owner":{"instanceID":0},"checkLayer":{"serializedVersion":"2","m_Bits":2039},"useWeaponFireContext":true,"mergeCheckLayer":true,"fallbackRange":50.0,"fallbackRadius":0.0,"fallbackOriginOffset":{"x":0.0,"y":1.4,"z":0.4},"maxTargets":1,"pierceTargets":false,"stopOnBlocker":true,"drawDebug":false}'
-      gameplayEffectAssets:
-      - {fileID: 11400000, guid: 59c0e8c766767724c980461942a9b51d, type: 2}
-      - {fileID: 11400000, guid: 963b33a2d04267548930b807c03878b0, type: 2}
-      - {fileID: 11400000, guid: 960bb34f4cb8e5842841651384e9e8a3, type: 2}
+        Data: '{"Owner":{"instanceID":0},"checkLayer":{"serializedVersion":"2","m_Bits":2039},"useWeaponFireContext":true,"mergeCheckLayer":true,"fallbackRange":50.0,"fallbackRadius":0.0,"fallbackOriginOffset":{"x":0.0,"y":1.399999976158142,"z":0.4000000059604645},"maxTargets":1,"pierceTargets":false,"stopOnBlocker":true,"drawDebug":true}'
+      gameplayEffectAssets: []
   BuffGameplayEffects: []
   InstantTasks: []
   OngoingTasks: []

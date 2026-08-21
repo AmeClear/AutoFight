@@ -25,6 +25,6 @@ MonoBehaviour:
   rayRadius: 0
   hitMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 384
   abilityAsset: {fileID: 11400000, guid: 0409e1847bae70c4fbccfeab79e90dda, type: 2}
   abilityName: GA_Fire

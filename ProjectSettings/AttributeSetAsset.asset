@@ -17,6 +17,5 @@ MonoBehaviour:
   - Name: Fight
     AttributeNames:
     - HealthValue
-    - AttackValue
     - StamValue
     - DefProgress

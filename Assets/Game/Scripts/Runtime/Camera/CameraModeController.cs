@@ -16,6 +16,10 @@ public class CameraModeController : MonoBehaviour
 
     public CameraControlMode CurrentMode { get; private set; }
     public CameraControllerBase ActiveController { get; private set; }
+    public bool IsAiming { get; private set; }
+
+    public Camera ActiveCamera =>
+        ActiveController != null ? ActiveController.Camera : null;
 
     private void Awake()
     {
@@ -58,6 +62,16 @@ public class CameraModeController : MonoBehaviour
         SetMode(CurrentMode == CameraControlMode.FirstPerson
             ? CameraControlMode.ThirdPerson
             : CameraControlMode.FirstPerson);
+    }
+
+    /// <summary>
+    /// 开镜/腰射。第三人称会拉近过肩距离并降低 FOV。
+    /// </summary>
+    public void SetAiming(bool aiming)
+    {
+        IsAiming = aiming;
+        if (thirdPersonController != null)
+            thirdPersonController.SetAiming(aiming);
     }
 
     private void ApplyTarget(Transform followTarget)

@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183fdb9275244e99bf882bd2e9cb85d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preset: {fileID: 11400000, guid: 9d0eef8b910f82d4192cfb24751c8299, type: 2}
+  preset: {fileID: 11400000, guid: ef56bb4ddb391824c90aa6bb318d75fb, type: 2}
 --- !u!114 &576108932738307894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,13 +127,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingWeapons:
   - {fileID: 11400000, guid: f181162afb3e88e4482f102b26359fc9, type: 2}
-  muzzle: {fileID: 0}
-  muzzleFallbackOffset: {x: 0, y: 1.4, z: 0.4}
+  muzzle: {fileID: 7848208771652826466}
+  muzzleFallbackOffset: {x: 0, y: 0, z: 0}
   aimFromCrosshair: 1
   aimCamera: {fileID: 0}
   aimMask:
     serializedVersion: 2
-    m_Bits: 2039
+    m_Bits: 256
   activateAbilityOnFire: 1
 --- !u!1 &2747355136232918235
 GameObject:

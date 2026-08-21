@@ -19,6 +19,8 @@ public abstract class CameraControllerBase : MonoBehaviour
         set => target = value;
     }
 
+    public Camera Camera => cameraComponent;
+
     protected virtual void Awake()
     {
         cameraComponent = GetComponent<Camera>();
@@ -56,6 +58,14 @@ public abstract class CameraControllerBase : MonoBehaviour
     {
         yaw = viewYaw;
         pitch = viewPitch;
+    }
+
+    /// <summary>
+    /// 穿过准星 PointCenter 的瞄准射线。未绑定准星时退回屏幕中心。
+    /// </summary>
+    public Ray GetAimRay()
+    {
+        return CrosshairAim.GetAimRay(cameraComponent);
     }
 
     protected abstract void UpdateCameraTransform();

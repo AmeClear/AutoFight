@@ -10,11 +10,11 @@ public class AutoPlayer : Actor
     public float AutoTime;
     private void Update()
     {
-        _autotime += Time.deltaTime;
-        if(_autotime>=AutoTime)
-        {
-            _autotime = 0;
-            asc.TryActivateAbility(index++%2==0?GAbilityLib.Atk.Name: GAbilityLib.Def.Name);
-        }
+        //_autotime += Time.deltaTime;
+        //if(_autotime>=AutoTime)
+        //{
+        //    _autotime = 0;
+        //    asc.TryActivateAbility(index++%2==0?GAbilityLib.Atk.Name: GAbilityLib.Def.Name);
+        //}
     }
 }
